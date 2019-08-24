@@ -1,0 +1,68 @@
+d = gamma1 + gamma2;
+mdr = -d * r;
+
+expTerm = exp(mdr);
+d2 = d * d * 0.5;
+d3 = d2 * d * 0.3333333333;
+d4 = d3 * d * 0.25;
+d5 = d4 * d * 0.2;
+d6 = d5 * d * 0.1666666667;
+d7 = d6 * d * 0.1428571429;
+d8 = d7 * d * 0.125;
+d9 = d8 * d * 0.1111111111;
+
+d10 = d9 * d * 0.1;
+invR = 1.0 / r;
+invR2 = invR * invR;
+invR3 = invR2 * invR;
+invR4 = invR3 * invR;
+invR5 = invR4 * invR;
+invR6 = invR5 * invR;
+invR7 = invR6 * invR;
+invR8 = invR7 * invR;
+invR9 = invR8 * invR;
+
+invR10 = invR9 * invR;
+combinedB = b1 * b2 * 0.5;
+combinedA = a1 * a2;
+buckinghamExp = -2.0 * combinedB * r;
+
+buckinghamRepulsion = combinedA * exp(buckinghamExp);
+
+c10E =
+  invR10 -
+  expTerm *
+    (invR10 +
+      d * invR9 +
+      d2 * invR8 +
+      d3 * invR7 +
+      d4 * invR6 +
+      d5 * invR5 +
+      d6 * invR4 +
+      d7 * invR3 +
+      d8 * invR2 +
+      d9 * invR +
+      d10);
+
+c8E =
+  invR8 -
+  expTerm *
+    (invR8 +
+      d * invR7 +
+      d2 * invR6 +
+      d3 * invR5 +
+      d4 * invR4 +
+      d5 * invR3 +
+      d6 * invR2 +
+      d7 * invR +
+      d8);
+
+c6E =
+  invR6 -
+  expTerm *
+    (invR6 + d * invR5 + d2 * invR4 + d3 * invR3 + d4 * invR2 + d5 * invR + d6);
+c10 = c101 * c102;
+c8 = c81 * c82;
+c6 = c61 * c62;
+
+buckinghamRepulsion - c6E * c6 - c8E * c8 - c10E * c10;
